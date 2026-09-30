@@ -15,7 +15,7 @@
       </nav>
     </header>
 
-    <main class="reservePage">
+    <main class="pageLayout">
       <!-------- Equipment image and description ------------>
       <section class="equip-info">
         <img class="equip-img" src="placeholder.svg" />
@@ -28,14 +28,12 @@
         <h2>Reserve equipment</h2>
         <p>Equipment:</p>
 
-        <form action="/reserve" method="post">
-          <label
-            >Date:
-            <input type="date" name="date" required />
+        <form>
+          <label>Date:
+            <input type="date" name="date" />
           </label>
 
-          <label
-            >Duration:
+          <label>Duration:
             <select name="duration">
               <option>30 minues</option>
               <option>1 hour</option>
@@ -44,10 +42,8 @@
             </select>
           </label>
 
-          <label
-            >Time slot:
-            <select name="time" required>
-              <option value="" disabled selected>Select time</option>
+          <label>Time slot:
+            <select name="time">
               <option>9:00 AM</option>
               <option>11:00 AM</option>
               <option>1:30 PM</option>

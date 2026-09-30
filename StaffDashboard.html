@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dashboard - Staff</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-------- Header and Nav ------------>
+    <header>
+      <nav class="navbar">
+        <h1>MakerspaceHub</h1>
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="StudentDashboard.html">Student</a></li>
+          <li><a class="nav-link" href="StaffDashboard.html" aria-current="page">Staff</a></li>
+          <li><a class="nav-link" href="MaintDashboard.html">Maint.</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="pageLayout">
+      
+      <!-------- Top row: low stock alert + inventory update form ------------>
+      <section class="top-row">
+        <div class="alert-box">
+          <strong>Low stock alerts: 1</strong>
+          <span>Plywood Sheets: 3</span>
+        </div>
+
+        <form class="form-grid inventory-form">
+            <h2>Update Inventory Counts</h2>
+            <label for="item">Item:</label>
+          <input type="text"/>
+
+          <label for="action">Add/Subtract:</label>
+          <select id="action" name="action">
+            <option>Add</option>
+            <option>Subtract</option>
+          </select>
+
+          <label for="quantity">Quantity:</label>
+          <input type="number" />
+
+          <a class="linkButton" href="StaffDashboard.html">Update</a>
+        </form>
+      </section>
+
+      <!-------- Consumables table ------------>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Consumable</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>Low Threshold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PLA Filament - Black</td>
+            <td>1.75mm black PLA 3D printer filament</td>
+            <td>12.50</td>
+            <td>5.00</td>
+          </tr>
+          <tr>
+            <td>PLA Filament - White</td>
+            <td>1.75mm white PLA 3D printer filament</td>
+            <td>4.00</td>
+            <td>5.00</td>
+          </tr>
+          <tr>
+            <td>Plywood Sheets</td>
+            <td>Thin plywood sheets for CNC</td>
+            <td>3.00</td>
+            <td>5.00</td>
+          </tr>
+          <tr>
+            <td>Heat Shrink Tubing</td>
+            <td>Assorted heat shrink tubing for electronics</td>
+            <td>25.00</td>
+            <td>10.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-------- Maintenance ticket form ------------>
+      <form class="form-grid ticket-form">
+            <h2>Maintenance Tickets</h2>
+        <label for="equipment">Equipment:</label>
+        <select id="equipment" name="equipment" required>
+          <option value="" disabled selected>Select equipment</option>
+          <option>CNC Router</option>
+          <option>Ultimaker S5</option>
+          <option>Soldering Station</option>
+          <option>Vinyl Cutter</option>
+        </select>
+
+        <label for="reason">Reason for Ticket:</label>
+        <textarea id="reason" name="reason" rows="4" required></textarea>
+
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+
+        <!---- Pretends to submit form, really just reloads page ----->
+        <a class="linkButton" href="StaffDashboard.html">Submit Ticket</a>
+      </form>
+
+      <!-------- Equipment table ------------>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Equipment</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CNC Router</td>
+            <td>Computer-controlled router for wood and plastic</td>
+            <td>CNC</td>
+            <td>Maintenance</td>
+          </tr>
+          <tr>
+            <td>Ultimaker S5</td>
+            <td>Professional 3D printer</td>
+            <td>3D Printer</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>Soldering Station</td>
+            <td>Electronics soldering station</td>
+            <td>Electronics</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>Vinyl Cutter</td>
+            <td>Computer-controlled vinyl cutting machine</td>
+            <td>Crafting</td>
+            <td>Available</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

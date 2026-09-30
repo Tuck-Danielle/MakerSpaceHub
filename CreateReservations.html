@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dashboard - Student</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <!-------- Header and Nav ------------>
+  <body>
+    <header>
+      <nav class="navbar">
+        <h1>MakerspaceHub</h1>
+      </nav>
+    </header>
+
+    <main class="reservePage">
+      <!-------- Equipment image and description ------------>
+      <section class="equip-info">
+        <img class="equip-img" src="placeholder.svg" />
+        <h2>Equipment Name</h2>
+        <h2 class="description">Description</h2>
+      </section>
+
+      <!-------- Reservation card ------------>
+      <section class="reserve-selection">
+        <h2>Reserve equipment</h2>
+        <p>Equipment:</p>
+
+        <form action="/reserve" method="post">
+          <label
+            >Date:
+            <input type="date" name="date" required />
+          </label>
+
+          <label
+            >Duration:
+            <select name="duration">
+              <option>30 minues</option>
+              <option>1 hour</option>
+              <option selected>2 hours</option>
+              <option>3 hours</option>
+            </select>
+          </label>
+
+          <label
+            >Time slot:
+            <select name="time" required>
+              <option value="" disabled selected>Select time</option>
+              <option>9:00 AM</option>
+              <option>11:00 AM</option>
+              <option>1:30 PM</option>
+              <option>3:00 PM</option>
+            </select>
+          </label>
+
+          <p class="note">Reservation conflicts are prevented automatically.</p>
+
+          <!-- Pretends to submit the form, doesn't actually verify -->
+          <a class="linkButton" href="StudentDashboard.html">Submit</a>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

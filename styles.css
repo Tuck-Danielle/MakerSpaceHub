@@ -1,0 +1,260 @@
+/********* GLOBAL RESET ***************/
+/* Include padding and borders in an element's width/height */
+* {
+  box-sizing: border-box;
+}
+
+/********* HEADER LOGIC ***************/
+.section-spacing {
+  margin-bottom: 20px;
+}
+
+header {
+  background-color: #a7a7a7;
+  width: 100%;
+  border-bottom: solid 1px #aaa;
+  /* removed: min-height, padding, display: flex, align-items, justify-content */
+}
+
+.navbar {
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between; /* title left, links right */
+  align-items: center;
+  padding: 0 24px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: 'Courier New', Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+  color: #131c26;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  transition: 0.7s ease;
+  font-family: 'Comic Sans', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  color: #131c26;
+}
+
+.nav-link[aria-current='page'] {
+  padding: 4px 10px;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/********* EQUIPMENT CATELOG LOGIC ***************/
+
+.gal-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+td img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+tbody {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: arial, sans-serif;
+  color: #131c26;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+/* ---------- Page layout ---------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main column for a page that just holds a form */
+.pageForm {
+  width: 100%;
+  max-width: 400px;
+  padding: 120px 24px 48px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*  Form  */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Username and password fields */
+input[type='text'],
+input[type='password'] {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px; /* space between border and typed text */
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 6px; /* slightly rounded corners */
+  background: #fff;
+}
+
+/* BUTTONS */
+.linkButton {
+  display: inline-block;
+  width: 190px;
+  height: 38px;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 12px;
+}
+
+.reserveButton {
+  display: block;
+  margin: 0 auto;
+  width: 90px;
+  height: 30px;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 12px;
+}
+
+/* hover on the "Button" */
+a:hover {
+  background: #f0f2f6;
+}
+
+/***** WELCOME IMAGE *********/
+.welcomeimg {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 350px;
+  display: block;
+}
+
+/***** RESERVATIONS PAGE ********/
+
+.reservePage {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 24px 48px;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Image and caption */
+.equip-info {
+  max-width: 260px;
+  text-align: center;
+  color: #555;
+}
+
+.equip-img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 auto 24px; 
+}
+
+.equip-info p {
+  margin: 0;
+}
+
+/* Bordered reservation box */
+.reserve-selection {
+  width: 100%;
+  max-width: 390px;
+  padding: 24px;
+  text-align: center;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 6px;
+}
+
+h2 {
+  font-family: Georgia, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #131c26;
+  padding: 10px 0;
+}
+
+h2.description {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.reserve-selection p {
+  margin: 0 0 12px;
+}
+
+.reserve-card label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reserve-selection input[type='date'],
+.reserve-selection select {
+  height: 32px;
+  padding: 0 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: 1.5px solid #2b2b3a;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.reserve-selection .note {
+  margin: 12px 0 0;
+  font-style: italic;
+}

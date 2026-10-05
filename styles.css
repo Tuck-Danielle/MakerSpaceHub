@@ -1,425 +1,450 @@
-/********* GLOBAL RESET ***************/
-/* Include padding and borders in an element's width/height */
-* {
-  box-sizing: border-box;
-}
+/************* VARIABLES **************/
+   :root {
+    /* Colors */
+    --color-ink: #131c26;
+    --color-text: #111;
+    --color-text-muted: #555;
+    --color-border: #2b2b3a;
+    --color-header-bg: #a7a7a7;
+    --color-header-border: #aaa;
+    --color-nav-active-bg: #b3b3b3;
+    --color-hover: #f0f2f6;
+    --color-hover-btn: #979797;
+    --color-table-head: #c8c8c8;
+    --color-table-stripe: #efefef;
+    --color-disabled-text: #999;
+    --color-disabled-border: #bbb;
+  
+    /* Shape */
+    --radius-sm: 6px;
+    --radius-lg: 12px;
+    --border-width: 1.5px;
+  }
+  
+  
+/************* RESET AND BASE ITEMS **************/
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    background: #fff;
+    color: var(--color-text);
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    background: var(--color-hover);
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Courier New', Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--color-ink);
+  }
+  
+  h2 {
+    margin: 0 0 8px;
+    padding: 10px 0;
+    font-family: Georgia, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+  
+  h2.description {
+    font-style: italic;
+    font-size: 15px;
+  }
+  
+  
+/************* LAYOUT **************/
+  .section-spacing {
+    margin-bottom: 20px;
+  }
+  
+  /* Main column for a standard page */
+  .pageLayout {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 16px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  /* Main column for a page that just holds a form */
+  .pageForm {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .welcomeimg {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin-top: 50px;
+  }
+  
+  
+/************* HEADER AND NAV **************/
+  header {
+    width: 100%;
+    background-color: var(--color-header-bg);
+    border-bottom: solid 1px var(--color-header-border);
+  }
+  
+  .navbar {
+    min-height: 70px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between; /* title left, links right */
+    align-items: center;
+  }
+  
+  .nav-menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  
+  .nav-link {
+    font-family: 'Comic Sans', Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    color: var(--color-ink);
+    transition: 0.7s ease;
+  }
+  
+  .nav-link[aria-current='page'] {
+    padding: 4px 10px;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-nav-active-bg);
+  }
+  
+  
+/************* FORMS AND INPUTS **************/
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  
+  /* Shared look for every field type */
+  select,
+  input[type='text'],
+  input[type='password'],
+  .reserve-selection input[type='date'],
+  .form-grid input,
+  .form-grid select,
+  .form-grid textarea {
+    font-family: inherit;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+  }
+  
+  select,
+  input[type='text'],
+  input[type='password'] {
+    height: 38px;
+    padding: 0 10px; /* space between border and typed text */
+    font-size: 1rem;
+  }
+  
+  input[type='text'],
+  input[type='password'] {
+    width: 100%;
+  }
+  
+  /* Two-column label/field grids (used by staff dashboard forms) */
+  .form-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 14px 16px;
+  }
+  
+  /* Heading and buttons span both columns */
+  .form-grid h2 {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .form-grid .linkButton {
+    grid-column: 1 / -1;
+    justify-self: right;
+  }
+  
+  .form-grid .actionButton {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+  
+  .form-grid label {
+    text-align: right;
+  }
+  
+  .form-grid input,
+  .form-grid select,
+  .form-grid textarea {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    font-size: 1rem;
+  }
+  
+  .form-grid textarea {
+    height: auto;
+    padding: 8px 10px;
+    resize: vertical;
+  }
 
-/********* HEADER LOGIC ***************/
-.section-spacing {
-  margin-bottom: 20px;
-}
+  .error {
+    margin: 0;
+    color: #b00020;    
+    font-size: 0.95rem;
+    text-align: center;
+  }
 
-header {
-  background-color: #a7a7a7;
-  width: 100%;
-  border-bottom: solid 1px #aaa;
-  /* removed: min-height, padding, display: flex, align-items, justify-content */
-}
+  .error:empty {
+    display: none;
+  }
+  
+  
+/************* BUTTONS **************/
+  .linkButton,
+  .reserveButton {
+    text-align: center;
+    text-decoration: none;
+    color: #222;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+  
+  .linkButton {
+    display: inline-block;
+    width: 190px;
+    height: 38px;
+    line-height: 35px;
+  }
+  
+  .reserveButton {
+    display: block;
+    margin: 0 auto;
+    width: 90px;
+    height: 30px;
+    line-height: 35px;
+  }
+  
+  /* Greyed-out "In Maintenance" button */
+  .reserveButton.disabled {
+    width: 120px;
+    color: var(--color-disabled-text);
+    border-color: var(--color-disabled-border);
+    cursor: not-allowed;
+  }
 
-.navbar {
-  min-height: 70px;
-  display: flex;
-  justify-content: space-between; /* title left, links right */
-  align-items: center;
-  padding: 0 24px;
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-h1 {
-  font-family: 'Courier New', Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 40px;
-  color: #131c26;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  transition: 0.7s ease;
-  font-family: 'Comic Sans', Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 20px;
-  color: #131c26;
-}
-
-.nav-link[aria-current='page'] {
-  padding: 4px 10px;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-  background: #b3b3b3;
-}
-
-
-/********* EQUIPMENT CATELOG LOGIC ***************/
-
-.gal-table {
-  border-collapse: separate;
-  border-spacing: 24px 40px;   
-  margin: 0 auto;              
-}
-
-.gal-table td {
-  width: 260px;
-  padding: 0;
-  vertical-align: top;         
-  text-align: center;
-  font-size: 14px;
-}
-
-.gal-table td img {
-  display: block;
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  margin: 0 auto 20px;
-}
-
-.gal-table p {
-  margin: 0 0 4px;
-}
-
-.equip-desc {
-  font-style: italic;
-}
-
-.gal-table .reserveButton {
-  margin-top: 12px;
-}
-
-/* Greyed-out "In Maintenance" button */
-.reserveButton.disabled {
-  width: 120px;                
-  color: #999;
-  border-color: #bbb;
-  cursor: not-allowed;
-}
-
-/*** PAGE LOGIC ******/
-
-.pageLayout {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 16px 24px 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-
-
-
-/* Main column for a page that just holds a form */
-.pageForm {
-  width: 100%;
-  max-width: 400px;
-  padding: 48px 24px 48px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Roboto, sans-serif;
-  background: #fff;
-  color: #111;
-  display: flex;
-  flex-direction: column;
-}
-
-
-/*  Form  */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-}
-
-select {
-  height: 38px;
-  padding: 0 10px;
-  font-family: inherit;
-  font-size: 1rem;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-  background: #fff;
-}
-
-/* Username and password fields */
-input[type='text'],
-input[type='password'] {
-  width: 100%;
-  height: 38px;
-  padding: 0 10px; /* space between border and typed text */
-  font-size: 1rem;
-  font-family: inherit;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px; /* slightly rounded corners */
-  background: #fff;
-}
-
-/* BUTTONS */
-.linkButton {
-  display: inline-block;
-  width: 190px;
-  height: 38px;
-  line-height: 35px;
-  text-align: center;
-  text-decoration: none;
-  color: #222;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 12px;
-}
-
-.reserveButton {
-  display: block;
-  margin: 0 auto;
-  width: 90px;
-  height: 30px;
-  line-height: 35px;
-  text-align: center;
-  text-decoration: none;
-  color: #222;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 12px;
-}
-
-/* hover on the "Button" */
-a:hover {
-  background: #f0f2f6;
-}
-
-/***** WELCOME IMAGE *********/
-.welcomeimg {
-  margin-top: 50px;
-  width: 100%;
-  max-width: 350px;
-  display: block;
-}
-
-/***** RESERVATIONS PAGE ********/
-
-
-/* Image and caption */
-.equip-info {
-  max-width: 260px;
-  text-align: center;
-  color: #555;
-}
-
-.equip-img {
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  margin: 0 auto 24px; 
-}
-
-.equip-info p {
-  margin: 0;
-}
-
-/* Bordered reservation box */
-.reserve-selection {
-  width: 100%;
-  max-width: 390px;
-  padding: 24px;
-  text-align: center;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-}
-
-h2 {
-  font-family: Georgia, Helvetica, sans-serif;
-  font-weight: bold;
-  margin: 0 0 8px;
-  font-size: 20px;
-  color: #131c26;
-  padding: 10px 0;
-}
-
-h2.description {
-  font-style: italic;
-  font-size: 15px;
-}
-
-.reserve-selection p {
-  margin: 0 0 12px;
-}
-
-.reserve-selection form {
-  gap: 14px;
-}
-
-.reserve-selection label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-
-.reserve-selection input[type='date'],
-.reserve-selection select {
-  height: 32px;
-  padding: 0 8px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.reserve-selection .note {
-  margin: 12px 0 0;
-  font-style: italic;
-}
-
-/****** STAFF DASHBOARD ******/
-
-.top-row {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.alert-box {
-  flex: 0 0 auto;
-  width: 500px;   
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 16px; 
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  text-align: center;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-}
-
-/* Heading and buttons span both columns */
-
-.form-grid h2 {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.form-grid .linkButton {      
-  grid-column: 1 / -1;
-  justify-self: right;
-}
-
- 
-.form-grid label {
-  text-align: right;
-}
- 
-.form-grid input,
-.form-grid select,
-.form-grid textarea {
-  width: 100%;
-  height: 38px;
-  padding: 0 10px;
-  font-family: inherit;
-  font-size: 1rem;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-  background: #fff;
-}
- 
-.form-grid textarea {
-  height: auto;
-  padding: 8px 10px;
-  resize: vertical;
-}
- 
-/* Buttons span both columns and sit in the middle */
-.form-grid .actionButton {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
- 
-.inventory-form {
-  flex: 0 1 380px;
-  display: grid;               
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px 16px;
-}
- 
-.ticket-form {
-  flex: 0 0 380px;
-  width: 500px;
-  display: grid;               
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px 16px;
-}
- 
-/* Tables: grey header, striped rows, rounded outline */
-.data-table {
-  width: 100%;
-  border-collapse: separate;   /* needed for the rounded corners */
-  border-spacing: 0;
-  border: 1.5px solid #2b2b3a;
-  border-radius: 6px;
-  overflow: hidden;
-  font-family: arial, sans-serif;
-  font-size: 14px;
-}
- 
-.data-table th,
-.data-table td {
-  padding: 6px 10px;
-  text-align: center;
-  border-left: 1px solid #2b2b3a;
-}
- 
-.data-table th:first-child,
-.data-table td:first-child {
-  text-align: left;
-  border-left: none;
-}
- 
-.data-table th {
-  background: #c8c8c8;
-  font-weight: normal;
-}
- 
-.data-table tbody tr:nth-child(even) {
-  background: #efefef;
-}
-
-
-/********* MAINTENANCE DASHBOARD ****************/
-
-.EquipmentSelect {
-  align-self: flex-start;
-  margin-top: 30px;
-}
+  button:hover {
+    background: var(--color-hover-btn);
+  }
+  
+  
+/************* STUDENT DASHBOARD EQUIPMENT **************/
+  .gal-table {
+    border-collapse: separate;
+    border-spacing: 24px 40px;
+    margin: 0 auto;
+  }
+  
+  .gal-table td {
+    width: 260px;
+    padding: 0;
+    vertical-align: top;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .gal-table td img {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto 20px;
+  }
+  
+  .gal-table p {
+    margin: 0 0 4px;
+  }
+  
+  .gal-table .reserveButton {
+    margin-top: 12px;
+  }
+  
+  .equip-desc {
+    font-style: italic;
+  }
+  
+  
+/************* RESERVATIONS PAGE **************/
+  
+  /* Image and caption */
+  .equip-info {
+    max-width: 260px;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+  
+  .equip-info p {
+    margin: 0;
+  }
+  
+  .equip-img {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto 24px;
+  }
+  
+  /* Bordered reservation box */
+  .reserve-selection {
+    width: 100%;
+    max-width: 390px;
+    padding: 24px;
+    text-align: center;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+  
+  .reserve-selection p {
+    margin: 0 0 12px;
+  }
+  
+  .reserve-selection form {
+    gap: 14px;
+  }
+  
+  .reserve-selection label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .reserve-selection input[type='date'],
+  .reserve-selection select {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 0.95rem;
+  }
+  
+  .reserve-selection .note {
+    margin: 12px 0 0;
+    font-style: italic;
+  }
+  
+  
+/************* STAFF DASHBOARD **************/
+  .top-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .alert-box {
+    flex: 0 0 auto;
+    width: 500px;
+    min-height: 200px;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+  
+  /* Forms (layout comes from .form-grid) */
+  .inventory-form {
+    flex: 0 1 380px;
+  }
+  
+  .ticket-form {
+    flex: 0 0 380px;
+  }
+  
+  /* Tables: grey header, striped rows, rounded outline */
+  .data-table {
+    width: 100%;
+    border-collapse: separate; /* needed for the rounded corners */
+    border-spacing: 0;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 6px 10px;
+    text-align: center;
+    border-left: 1px solid var(--color-border);
+  }
+  
+  .data-table th:first-child,
+  .data-table td:first-child {
+    text-align: left;
+    border-left: none;
+  }
+  
+  .data-table th {
+    background: var(--color-table-head);
+    font-weight: normal;
+  }
+  
+  .data-table tbody tr:nth-child(even) {
+    background: var(--color-table-stripe);
+  }
+  
+  
+/************* MAINTENANCE DASHBOARD **************/
+  .EquipmentSelect {
+    align-self: flex-start;
+    margin-top: 30px;
+  }

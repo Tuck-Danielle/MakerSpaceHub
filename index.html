@@ -5,21 +5,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    
   </head>
 
   <body>
     <main class="pageForm">
       <h1>MakerspaceHub</h1>
 
-      <form action="/login" method="post">
+      <form id="loginForm">
         <!-- Username -->
-        <input type="text" name="username" placeholder="Username" />
+        <input type="text" id="username" name="username" placeholder="Username" required/>
         <!-- Password -->
-        <input type="password" name="password" placeholder="Password" />
-
-        <!-- Pretends to submit the form, doesn't actually verify -->
-        <a class="linkButton" href="StudentDashboard.html">Login</a>
+        <input type="password" id="password" name="password" placeholder="Password" required/>
+        <p class="error" id="loginError" role="alert"></p>
+        <!-- Submits the form -->
+        <button class="linkButton" type="submit">Login</button>
       </form>
+      
+      <script src="login.js"></script>
 
       <div
         class="welcomeimg"

@@ -1,4 +1,4 @@
-// store.js - the "database" for MakerspaceHub.
+// equipment.js - the "database" for MakerspaceHub.
 // Data starts in the api/*.json files. The first time we load a file, we copy it into
 // localStorage (the browser's built-in storage). After that we read and change the copy.
 
@@ -11,13 +11,20 @@ function saveData(name, data) {
 
 // Get a list by name: 'equipment', 'reservations', 'tickets' or 'inventory'.
 async function loadData(name) {
-  const saved = localStorage.getItem('mh_' + name);
+  // Equipment is never changed by the app, so always read it fresh from the JSON file.
+  // (Otherwise edits to api/equipment.json would be hidden by an old saved copy.)
+  const saved = (name === 'equipment') ? null : localStorage.getItem('mh_' + name);
   if (saved !== null) {
     return JSON.parse(saved); // we already have a copy, use it
   }
   const response = await fetch('api/' + name + '.json'); // first visit: read the JSON file
+if (!response.ok) {
+    throw new Error('Could not load api/' + name + '.json (status ' + response.status + ')');
+  }
   const data = await response.json();
+if (name !== 'equipment') {
   saveData(name, data);
+}
   return data;
 }
 

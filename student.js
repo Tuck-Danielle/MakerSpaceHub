@@ -18,11 +18,11 @@ async function showPage() {
     if (isDown(item.id, tickets)) {
       grid += '<span class="reserveButton disabled">In Maintenance</span>';
     } else {
-      grid += '<a class="reserveButton" href="CreateReservations.html?id=' + item.id + '">Reserve</a>';
+      grid += '<a class="reserveButton" href="CreateReservations.html?id=' + encodeURIComponent(item.id) + '">Reserve</a>';
     }
     grid += '</td>';
-    if ((i + 1) % 3 === 0) {
-      grid += '</tr><tr>'; // start a new row after every 3rd item
+    if ((i + 1) % 3 === 0 && i + 1 < equipment.length) {
+      grid += '</tr><tr>'; // start a new row after every 3rd item (not after the last one)
     }
   }
   grid += '</tr>';

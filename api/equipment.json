@@ -1,0 +1,11 @@
+[
+  { "id": "ultimaker-s5", "name": "Ultimaker S5", "description": "Professional 3D Printer", "category": "3D Printer" },
+  { "id": "cnc-router", "name": "CNC Router", "description": "Computer-controlled router for wood and plastic", "category": "CNC" },
+  { "id": "soldering-station", "name": "Soldering Station", "description": "Electronics soldering station", "category": "Electronics" },
+  { "id": "vinyl-cutter", "name": "Vinyl Cutter", "description": "Computer-controlled vinyl cutting machine", "category": "Crafting" },
+  { "id": "laser-cutter", "name": "Laser Cutter", "description": "Laser for cutting and engraving acrylic and wood", "category": "Laser" },
+  { "id": "heat-press", "name": "Heat Press", "description": "Machine to apply vinyl transfers to misc materials", "category": "Crafting" },
+  { "id": "sewing-machine", "name": "Sewing Machine", "description": "Tools to sew fabrics", "category": "Crafting" },
+  { "id": "resin-printer", "name": "Resin Printer", "description": "High-detail printer for miniatures and small parts", "category": "3D Printer"},
+  { "id": "band-saw", "name": "Band Saw", "description": "Woodworking tool to cut wood", "category": "Tools" }
+]

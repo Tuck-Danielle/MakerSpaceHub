@@ -1,0 +1,11 @@
+[
+  { "id": "MT-104", "equipmentId": "cnc-router", "assigned": "Tris", "priority": "High", "status": "In Progress", "created": "2026-09-21", "updated": "2026-09-25",
+    "log": [ { "date": "2026-09-21", "status": "Pending", "by": "Mark", "note": "Spindle will not start" },
+             { "date": "2026-09-25", "status": "In Progress", "by": "Tris", "note": "Replacement relay ordered" } ] },
+  { "id": "MT-103", "equipmentId": "vinyl-cutter", "assigned": "Mark", "priority": "Low", "status": "Pending", "created": "2026-09-21", "updated": null,
+    "log": [ { "date": "2026-09-21", "status": "Pending", "by": "Mark", "note": "Blade holder is loose" } ] },
+  { "id": "MT-102", "equipmentId": "ultimaker-s5", "assigned": "Tris", "priority": "Medium", "status": "Completed", "created": "2026-09-19", "updated": "2026-09-20",
+    "log": [ { "date": "2026-09-19", "status": "Pending", "by": "Mark", "note": "3D printer nozzle appears to be partially clogged" },
+             { "date": "2026-09-19", "status": "In Progress", "by": "Tris", "note": "Inspected printer and identified possible nozzle blockage" },
+             { "date": "2026-09-20", "status": "Completed", "by": "Tris", "note": "Cleaned nozzle and completed test print" } ] }
+]

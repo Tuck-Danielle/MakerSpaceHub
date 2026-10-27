@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
-  <!-------- Header and Nav ------------>
   <body>
     <header>
       <nav class="navbar">
@@ -18,71 +16,17 @@
       </nav>
     </header>
 
-    <!-------- Equipment Table  ------------>
-    <table class="gal-table">
-      <tbody>
-        <tr>
-          <td>
-            <img src="placeholder.svg" alt="Ultimaker S5" />
-            <p class="equip-name">Ultimaker S5</p>
-            <p class="equip-desc">Professional 3D Printer</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="CNC Router" />
-            <p class="equip-name">CNC Router</p>
-            <p class="equip-desc">Computer-controlled router for wood and plastic</p>
-            <span class="reserveButton disabled" aria-disabled="true">In Maintenance</span>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="Soldering Station" />
-            <p class="equip-name">Soldering Station</p>
-            <p class="equip-desc">Electronics Soldering Station</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="placeholder.svg" alt="Vinyl Cutter" />
-            <p class="equip-name">Vinyl Cutter</p>
-            <p class="equip-desc">Computer-Controlled vinyl cutting machine</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="Equipment" />
-            <p class="equip-name">Equipment Name</p>
-            <p class="equip-desc">Description</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="Equipment" />
-            <p class="equip-name">Equipment Name</p>
-            <p class="equip-desc">Description</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="placeholder.svg" alt="Equipment" />
-            <p class="equip-name">Equipment Name</p>
-            <p class="equip-desc">Description</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="Equipment" />
-            <p class="equip-name">Equipment Name</p>
-            <p class="equip-desc">Description</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-          <td>
-            <img src="placeholder.svg" alt="Equipment" />
-            <p class="equip-name">Equipment Name</p>
-            <p class="equip-desc">Description</p>
-            <a class="reserveButton" href="CreateReservations.html">Reserve</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <table class="gal-table"><tbody id="equipGrid"></tbody></table>
+
+    <main class="pageLayout">
+      <h2>My reservations</h2>
+      <table class="data-table">
+        <thead><tr><th>Equipment</th><th>Start</th><th>End</th><th></th></tr></thead>
+        <tbody id="myRes"></tbody>
+      </table>
+    </main>
+    <script src="equipment.js"></script>
+    <script src="student.js"></script>
     <script src="logout.js"></script>
   </body>
 </html>

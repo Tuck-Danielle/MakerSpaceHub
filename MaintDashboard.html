@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Dashboard - Staff</title>
+    <title>Dashboard - Maintenance</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
-    <!-------- Header and Nav ------------>
     <header>
       <nav class="navbar">
         <h1>MakerspaceHub</h1>
@@ -19,120 +17,32 @@
     </header>
 
     <main class="pageLayout">
-
-      <!-------- Tickets table ------------>
       <h2>Maintenance Tickets</h2>
       <table class="data-table">
-        <thead>
-            <tr>
-                <th>Ticket</th>
-                <th>Equipment</th>
-                <th>Assigned</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Created</th>
-                <th>Updated</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>MT-104</td>
-                <td>CNC router</td>
-                <td>Tris</td>
-                <td>High</td>
-                <td>In progress</td>
-                <td>Sep 21</td>
-                <td>Sep 25</td>
-              </tr>
-              <tr>
-                <td>MT-103</td>
-                <td>Vinyl cutter</td>
-                <td>Mark</td>
-                <td>Low</td>
-                <td>Pending</td>
-                <td>Sep 21</td>
-                <td>---</td>
-              </tr>
-              <tr>
-                <td>MT-102</td>
-                <td>Ultimaker S5</td>
-                <td>Tris</td>
-                <td>Med.</td>
-                <td>Completed</td>
-                <td>Sep 19</td>
-                <td>Sep 20</td>
-              </tr>
-        </tbody>
+        <thead><tr><th>Ticket</th><th>Equipment</th><th>Assigned</th><th>Priority</th><th>Status</th><th>Created</th><th>Updated</th></tr></thead>
+        <tbody id="tickets"></tbody>
       </table>
-    
-    <select class="EquipmentSelect">
-        <option>UltiMaker S5</option>
-      </select>
 
-      <!-------- Equipment table ------------>
+      <select class="EquipmentSelect" id="eqFilter" aria-label="Filter history by equipment"></select>
       <table class="data-table">
-        <thead>
-            <tr>
-              <th>Date</th>
-              <th>Ticket</th>
-              <th>Assigned</th>
-              <th>Status</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sep 19</td>
-              <td>MT-104</td>
-              <td>Tris</td>
-              <td>Pending</td>
-              <td>3D printer nozzle appears to be partially clogged</td>
-            </tr>
-            <tr>
-              <td>Sep 19</td>
-              <td>MT-104</td>
-              <td>Tris</td>
-              <td>In Progress</td>
-              <td>Inspected printer and identified possible nozzle blockage</td>
-            </tr>
-            <tr>
-              <td>Sep 20</td>
-              <td>MT-104</td>
-              <td>Tris</td>
-              <td>Completed</td>
-              <td>Cleaned nozzle and completed test print</td>
-            </tr>
-          </tbody>
-        </table>
+        <thead><tr><th>Date</th><th>Ticket</th><th>Assigned</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="history"></tbody>
+      </table>
 
-
-            <!-------- Maintenance ticket form ------------>
-            <form class="form-grid ticket-form">
-                <h2>Maintenance Ticket Update</h2>
-            <label>Ticket:</label>
-            <select>
-              <option disabled selected>Select Ticket</option>
-              <option>MT-102</option>
-              <option>MT-103</option>
-              <option>MT-104</option>
-            </select>
-
-            <label>Status:</label>
-            <select>
-              <option disabled selected>Select Status</option>
-              <option>In Progress</option>
-              <option>Completed</option>
-            </select>
-    
-            <label>Notes:</label>
-            <textarea rows="4"></textarea>
-    
-    
-            <!---- Pretends to submit form, really just reloads page ----->
-            <a class="linkButton" href="MaintDashboard.html">Update Ticket</a>
-          </form>
-    
+      <form class="form-grid ticket-form" id="updateForm">
+        <h2>Maintenance Ticket Update</h2>
+        <label for="ticket">Ticket:</label>
+        <select id="ticket" required></select>
+        <label for="status">Status:</label>
+        <select id="status"><option>In Progress</option><option>Completed</option></select>
+        <label for="notes">Notes:</label>
+        <textarea id="notes" rows="4"></textarea>
+        <p class="error" id="msg" role="alert"></p>
+        <button class="linkButton" type="submit">Update Ticket</button>
+      </form>
     </main>
+    <script src="store.js"></script>
+    <script src="maint.js"></script>
     <script src="logout.js"></script>
   </body>
 </html>

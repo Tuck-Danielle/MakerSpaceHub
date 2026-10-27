@@ -1,62 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Dashboard - Student</title>
+    <title>Reserve - MakerspaceHub</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
-  <!-------- Header and Nav ------------>
   <body>
     <header>
       <nav class="navbar">
         <h1>MakerspaceHub</h1>
+        <ul class="nav-menu"><li><a class="nav-link" href="StudentDashboard.html">Back</a></li></ul>
       </nav>
     </header>
 
     <main class="pageLayout">
-      <!-------- Equipment image and description ------------>
       <section class="equip-info">
-        <img class="equip-img" src="placeholder.svg" />
-        <h2>Equipment Name</h2>
-        <h2 class="description">Description</h2>
+        <img class="equip-img" src="placeholder.svg" alt="" />
+        <h2 id="eqName">Equipment</h2>
+        <h2 class="description" id="eqDesc"></h2>
       </section>
 
-      <!-------- Reservation card ------------>
       <section class="reserve-selection">
         <h2>Reserve equipment</h2>
-        <p>Equipment:</p>
-
-        <form>
+        <form id="reserveForm">
           <label>Date:
-            <input type="date" name="date" />
+            <input type="date" id="date" required />
           </label>
-
           <label>Duration:
-            <select name="duration">
-              <option>30 minues</option>
-              <option>1 hour</option>
-              <option selected>2 hours</option>
-              <option>3 hours</option>
+            <select id="duration">
+              <option value="30">30 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="120" selected>2 hours</option>
+              <option value="180">3 hours</option>
             </select>
           </label>
-
           <label>Time slot:
-            <select name="time">
-              <option>9:00 AM</option>
-              <option>11:00 AM</option>
-              <option>1:30 PM</option>
-              <option>3:00 PM</option>
+            <select id="time">
+              <option value="09:00">9:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="13:30">1:30 PM</option>
+              <option value="15:00">3:00 PM</option>
             </select>
           </label>
-
+          <p class="error" id="msg" role="alert"></p>
           <p class="note">Reservation conflicts are prevented automatically.</p>
-
-          <!-- Pretends to submit the form, doesn't actually verify -->
-          <a class="linkButton" href="StudentDashboard.html">Submit</a>
+          <button class="linkButton" type="submit">Reserve</button>
         </form>
       </section>
     </main>
+    <script src="store.js"></script>
+    <script src="reserve.js"></script>
   </body>
 </html>

@@ -1,0 +1,6 @@
+[
+  { "id": "pla-black", "name": "PLA Filament - Black", "description": "1.75mm black PLA 3D printer filament", "stock": 12.5, "lowThreshold": 5 },
+  { "id": "pla-white", "name": "PLA Filament - White", "description": "1.75mm white PLA 3D printer filament", "stock": 4, "lowThreshold": 5 },
+  { "id": "plywood", "name": "Plywood Sheets", "description": "Thin plywood sheets for CNC", "stock": 3, "lowThreshold": 5 },
+  { "id": "heat-shrink", "name": "Heat Shrink Tubing", "description": "Assorted heat shrink tubing for electronics", "stock": 25, "lowThreshold": 10 }
+]

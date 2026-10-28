@@ -1,8 +1,8 @@
-// reserve.js - the reservation form
+// reserve.js -  reservation form
 const user = checkLogin('student');
-const equipmentId = new URLSearchParams(location.search).get('id'); // from ...?id=cnc-router
+const equipmentId = new URLSearchParams(location.search).get('id'); 
 
-// Fill in the equipment name and description at the top of the page.
+// Fill in the equipment name and description 
 async function showEquipment() {
   const equipment = await loadData('equipment');
   const item = findById(equipment, equipmentId);
@@ -15,9 +15,9 @@ async function showEquipment() {
   document.getElementById('date').min = todayText(); // can't pick past dates
 }
 
-// Runs when the form is submitted.
+// Form is submitted.
 document.getElementById('reserveForm').addEventListener('submit', async function (event) {
-  event.preventDefault(); // stop the page from reloading
+  event.preventDefault(); //Don't want to reload
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
   const minutes = Number(document.getElementById('duration').value);

@@ -24,7 +24,7 @@ async function showPage() {
     }
   }
 
-  // History table: every log line of every ticket that matches the filter
+  // History table
   let history = '';
   for (let i = 0; i < tickets.length; i++) {
     const t = tickets[i];
@@ -41,7 +41,7 @@ async function showPage() {
   }
   document.getElementById('history').innerHTML = history;
 
-  // Update form: only tickets that aren't finished
+  // Update form for unifished tickets
   let options = '';
   for (let i = 0; i < tickets.length; i++) {
     if (tickets[i].status !== 'Completed') {

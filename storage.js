@@ -1,34 +1,30 @@
-// storage.js - the "database" for MakerspaceHub.
-// Data starts in the api/*.json files. The first time we load a file, we copy it into
-// localStorage (the browser's built-in storage). After that we read and change the copy.
+// ---------- loading / saving ----------
 
-// ---------- Loading and saving ----------
-
-// Save a list (like all reservations) into the browser.
 function saveData(name, data) {
   localStorage.setItem('mh_' + name, JSON.stringify(data));
 }
 
-// Get a list by name: 'equipment', 'reservations', 'tickets' or 'inventory'.
+// name is 'equipment', 'reservations', 'tickets' or 'inventory'
 async function loadData(name) {
-  // Equipment is never changed by the app, so always read it fresh from the JSON file.
-  // (Otherwise edits to api/equipment.json would be hidden by an old saved copy.)
+  // equipment never changes in the app, so just read the file 
   const saved = (name === 'equipment') ? null : localStorage.getItem('mh_' + name);
   if (saved !== null) {
-    return JSON.parse(saved); // we already have a copy, use it
+    return JSON.parse(saved);
   }
-  const response = await fetch('api/' + name + '.json'); // first visit: read the JSON file
-if (!response.ok) {
+
+  const response = await fetch('api/' + name + '.json');
+  if (!response.ok) {
     throw new Error('Could not load api/' + name + '.json (status ' + response.status + ')');
   }
   const data = await response.json();
-if (name !== 'equipment') {
-  saveData(name, data);
-}
+
+  if (name !== 'equipment') {
+    saveData(name, data);
+  }
   return data;
 }
 
-// Throw away all changes and go back to the JSON file data.
+// Clears session storage to revert back to just the json fiels
 function resetData() {
   const names = ['equipment', 'reservations', 'tickets', 'inventory'];
   for (let i = 0; i < names.length; i++) {
@@ -37,10 +33,11 @@ function resetData() {
   location.reload();
 }
 
-// ---------- Login check ----------
 
-// Call at the top of a page. Sends people back to the login if they aren't the right role.
-// Returns the logged-in user, like { username: 'Susan', role: 'student' }.
+// ---------- login check ----------
+
+// Put at the top of each dashboard. Kicks you back to the login page if you're
+// not logged in or have the wrong role, otherwise returns the user.
 function checkLogin(role) {
   const user = JSON.parse(sessionStorage.getItem('user'));
   if (user === null || user.role !== role) {
@@ -50,9 +47,9 @@ function checkLogin(role) {
   return user;
 }
 
-// ---------- Small helpers ----------
 
-// Find the item in a list whose id matches. Returns null if there isn't one.
+// ---------- helpers ----------
+
 function findById(list, id) {
   for (let i = 0; i < list.length; i++) {
     if (list[i].id === id) {
@@ -62,7 +59,7 @@ function findById(list, id) {
   return null;
 }
 
-// Turn a number like 5 into '05' so times look right.
+// makes the numbrs prettier
 function pad(number) {
   if (number < 10) {
     return '0' + number;
@@ -70,29 +67,32 @@ function pad(number) {
   return '' + number;
 }
 
-// Turn a Date into text like '2026-10-28T09:00'.
-// Text in this format can be compared with < and > to see which time is earlier.
+// Date -> '2026-10-28T09:00'. Strings in this format can be compared with < and >
+// to see which time comes first, which the reservation check uses.
 function dateToText(date) {
   return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) +
          'T' + pad(date.getHours()) + ':' + pad(date.getMinutes());
 }
 
-// Today's date as text like '2026-10-28'.
+// '2026-10-28'
 function todayText() {
   return dateToText(new Date()).slice(0, 10);
 }
 
-// Make text safe to put inside HTML (stops someone typing <b> or <script> into a note).
+// so a note with <b> or <script> in it shows up as plain text
 function escapeHtml(text) {
-  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-// Show a stored date-time like '2026-10-28T09:00' in a friendly way.
 function showDateTime(text) {
   return new Date(text).toLocaleString();
 }
 
-// Show a stored date like '2026-09-21'. Tickets that haven't been updated have no date.
+// tickets that were never updated have null here
 function showDate(text) {
   if (text === null) {
     return '---';
@@ -100,10 +100,11 @@ function showDate(text) {
   return new Date(text + 'T00:00').toLocaleDateString();
 }
 
-// ---------- Equipment and tickets ----------
 
-// Equipment is out of service if it has an unfinished ticket that is
-// 'In Progress' or High priority. (Change this rule here if you want a different one.)
+// ---------- equipment and tickets ----------
+
+// Equipment counts as down if it has an open ticket that is In Progress or High priority.
+// Change the rule here if we want something different.
 function isDown(equipmentId, tickets) {
   for (let i = 0; i < tickets.length; i++) {
     const t = tickets[i];
@@ -116,14 +117,14 @@ function isDown(equipmentId, tickets) {
   return false;
 }
 
-// Make a new ticket. Returns its id, like 'MT-105'.
+// returns the new ticket id, like 'MT-105'
 async function createTicket(equipmentId, reason, priority, username) {
   const tickets = await loadData('tickets');
 
-  // Find the biggest ticket number so far, then add 1.
+  // new id = highest number so far + 1
   let biggest = 100;
   for (let i = 0; i < tickets.length; i++) {
-    const number = Number(tickets[i].id.split('-')[1]); // 'MT-104' -> 104
+    const number = Number(tickets[i].id.split('-')[1]);
     if (number > biggest) {
       biggest = number;
     }
@@ -131,16 +132,21 @@ async function createTicket(equipmentId, reason, priority, username) {
   const newId = 'MT-' + (biggest + 1);
 
   const today = todayText();
-  tickets.unshift({ // unshift puts it at the top of the list
-    id: newId, equipmentId: equipmentId, assigned: 'Unassigned', priority: priority,
-    status: 'Pending', created: today, updated: null,
+  tickets.unshift({
+    id: newId,
+    equipmentId: equipmentId,
+    assigned: 'Unassigned',
+    priority: priority,
+    status: 'Pending',
+    created: today,
+    updated: null,
     log: [{ date: today, status: 'Pending', by: username, note: reason }]
   });
   saveData('tickets', tickets);
   return newId;
 }
 
-// Change a ticket's status and add a line to its history.
+// sets the new status and adds a line to the ticket's history
 async function updateTicket(ticketId, status, note, username) {
   const tickets = await loadData('tickets');
   const ticket = findById(tickets, ticketId);
@@ -151,29 +157,30 @@ async function updateTicket(ticketId, status, note, username) {
   saveData('tickets', tickets);
 }
 
-// ---------- Reservations ----------
 
-// Try to book equipment. Returns { ok: true } or { ok: false, error: 'why not' }.
+// ---------- reservations ----------
+
+// returns { ok: true } or { ok: false, error: '...' }
 async function reserve(equipmentId, username, date, time, minutes) {
   if (date === '') {
     return { ok: false, error: 'Choose a date.' };
   }
 
-  const start = date + 'T' + time; // e.g. '2026-10-28T09:00'
+  const start = date + 'T' + time;
   const endDate = new Date(start);
   endDate.setMinutes(endDate.getMinutes() + minutes);
   const end = dateToText(endDate);
 
   if (start < dateToText(new Date())) {
-    return { ok: false, error: 'That time has already passed.' };
+    return { ok: false, error: 'Can not select time in the past.' };
   }
 
   const tickets = await loadData('tickets');
   if (isDown(equipmentId, tickets)) {
-    return { ok: false, error: 'This equipment is in maintenance.' };
+    return { ok: false, error: 'Equipment is in maintenance.' };
   }
 
-  // Two bookings overlap when each one starts before the other ends.
+  // two reservations overlap if each one starts before the other one ends
   const reservations = await loadData('reservations');
   for (let i = 0; i < reservations.length; i++) {
     const r = reservations[i];
@@ -182,33 +189,44 @@ async function reserve(equipmentId, username, date, time, minutes) {
     }
   }
 
-  reservations.push({ id: 'R-' + Date.now(), equipmentId: equipmentId, user: username,
-                      start: start, end: end, status: 'confirmed' });
+  reservations.push({
+    id: 'R-' + Date.now(),
+    equipmentId: equipmentId,
+    user: username,
+    start: start,
+    end: end,
+    status: 'confirmed'
+  });
   saveData('reservations', reservations);
   return { ok: true };
 }
 
-// Cancel a reservation (we keep it in the list but mark it cancelled).
+// stays in the list, just marked cancelled
 async function cancelReservation(reservationId) {
   const reservations = await loadData('reservations');
   findById(reservations, reservationId).status = 'cancelled';
   saveData('reservations', reservations);
 }
 
-// ---------- Inventory ----------
 
-// Add (positive number) or subtract (negative number) stock.
-// Returns { ok: true } or { ok: false, error: 'why not' }.
+// ---------- inventory ----------
+
+// change is positive to add stock, negative to remove
+// returns { ok: true } or { ok: false, error: '...' }
 async function adjustStock(itemId, change) {
   if (isNaN(change) || change === 0) {
     return { ok: false, error: 'Enter a quantity greater than 0.' };
   }
+
   const inventory = await loadData('inventory');
   const item = findById(inventory, itemId);
-  const newStock = Math.round((item.stock + change) * 100) / 100; // rounds to 2 decimals
+
+  // round to 2 decimals 
+  const newStock = Math.round((item.stock + change) * 100) / 100;
   if (newStock < 0) {
     return { ok: false, error: "Can't subtract " + Math.abs(change) + ": only " + item.stock + " of " + item.name + " in stock." };
   }
+
   item.stock = newStock;
   saveData('inventory', inventory);
   return { ok: true };

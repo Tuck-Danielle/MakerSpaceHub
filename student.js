@@ -1,7 +1,7 @@
-// student.js - the student dashboard
+// the student dashboard
 const user = checkLogin('student');
 
-// Build the equipment grid and the "My reservations" table.
+// Equipment grid and the "My reservations" table.
 async function showPage() {
   const equipment = await loadData('equipment');
   const tickets = await loadData('tickets');
@@ -22,13 +22,13 @@ async function showPage() {
     }
     grid += '</td>';
     if ((i + 1) % 3 === 0 && i + 1 < equipment.length) {
-      grid += '</tr><tr>'; // start a new row after every 3rd item (not after the last one)
+      grid += '</tr><tr>'; 
     }
   }
   grid += '</tr>';
   document.getElementById('equipGrid').innerHTML = grid;
 
-  // This student's upcoming, confirmed reservations
+  // Student's upcoming, confirmed reservations
   let rows = '';
   const now = dateToText(new Date());
   for (let i = 0; i < reservations.length; i++) {
@@ -48,7 +48,7 @@ async function showPage() {
   document.getElementById('myRes').innerHTML = rows;
 }
 
-// Runs when a Cancel button is clicked.
+// Cancel button is clicked
 async function cancelClicked(reservationId) {
   await cancelReservation(reservationId);
   showPage();

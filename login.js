@@ -9,7 +9,7 @@ const dashboards = {
   async function authenticate(username, password) {
     const response = await fetch('api/users.json'); //what file to reference
     if (!response.ok) throw new Error(`Request failed: ${response.status}`); //error if not responding
-    const users = await response.json(); //wait for the response
+    const users = await response.json(); 
   
     //returns user or null if not found
     return users.find(u => u.username === username && u.password === password) || null;
@@ -32,7 +32,7 @@ const dashboards = {
         return;
       }
 
-      //Creates persistence in what user is logged in 
+      //Saves user and role to sessionStorage
       sessionStorage.setItem('user', JSON.stringify({ username: user.username, role: user.role }));
       window.location.href = dashboards[user.role]; //redirects user to their role's dashboard 
 

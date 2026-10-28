@@ -1,7 +1,7 @@
-// staff.js - the staff dashboard
+// staff.js -  staff dashboard
 const user = checkLogin('staff');
 
-// Fill a dropdown with options, but only the first time (so it keeps what you picked).
+// The first time, fill a dropdown with options
 function fillDropdown(selectId, list) {
   const select = document.getElementById(selectId);
   if (select.options.length > 0) {

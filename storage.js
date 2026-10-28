@@ -1,4 +1,4 @@
-// equipment.js - the "database" for MakerspaceHub.
+// storage.js - the "database" for MakerspaceHub.
 // Data starts in the api/*.json files. The first time we load a file, we copy it into
 // localStorage (the browser's built-in storage). After that we read and change the copy.
 
